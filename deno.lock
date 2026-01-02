@@ -1,0 +1,48 @@
+{
+  "version": "5",
+  "specifiers": {
+    "jsr:@std/fs@^1.0.21": "1.0.21",
+    "jsr:@std/internal@^1.0.12": "1.0.12",
+    "jsr:@std/path@^1.1.4": "1.1.4",
+    "npm:node-sql-parser@^5.3.13": "5.3.13"
+  },
+  "jsr": {
+    "@std/fs@1.0.21": {
+      "integrity": "d720fe1056d78d43065a4d6e0eeb2b19f34adb8a0bc7caf3a4dbf1d4178252cd",
+      "dependencies": [
+        "jsr:@std/internal",
+        "jsr:@std/path"
+      ]
+    },
+    "@std/internal@1.0.12": {
+      "integrity": "972a634fd5bc34b242024402972cd5143eac68d8dffaca5eaa4dba30ce17b027"
+    },
+    "@std/path@1.1.4": {
+      "integrity": "1d2d43f39efb1b42f0b1882a25486647cb851481862dc7313390b2bb044314b5",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    }
+  },
+  "npm": {
+    "@types/pegjs@0.10.6": {
+      "integrity": "sha512-eLYXDbZWXh2uxf+w8sXS8d6KSoXTswfps6fvCUuVAGN8eRpfe7h9eSRydxiSJvo9Bf+GzifsDOr9TMQlmJdmkw=="
+    },
+    "big-integer@1.6.52": {
+      "integrity": "sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg=="
+    },
+    "node-sql-parser@5.3.13": {
+      "integrity": "sha512-heyWv3lLjKHpcBDMUSR+R0DohRYZTYq+Ro3hJ4m9Ia8ccdKbL5UijIaWr2L4co+bmmFuvBVZ4v23QW2PqvBFAA==",
+      "dependencies": [
+        "@types/pegjs",
+        "big-integer"
+      ]
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/fs@^1.0.21",
+      "npm:node-sql-parser@^5.3.13"
+    ]
+  }
+}

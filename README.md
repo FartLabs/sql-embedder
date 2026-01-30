@@ -1,5 +1,9 @@
 # sql-embedder
 
+[![JSR](https://jsr.io/badges/@fartlabs/sql-embedder)](https://jsr.io/@fartlabs/sql-embedder)
+[![JSR score](https://jsr.io/badges/@fartlabs/sql-embedder/score)](https://jsr.io/@fartlabs/sql-embedder/score)
+[![GitHub Actions](https://github.com/FartLabs/sql-embedder/actions/workflows/publish.yaml/badge.svg)](https://github.com/FartLabs/sql-embedder/actions/workflows/publish.yaml)
+
 Embed SQL into TypeScript source code.
 
 `sql-embedder` is a tool to make developing and distributing Deno applications

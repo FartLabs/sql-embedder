@@ -1,9 +1,14 @@
 {
   "tasks": {
-    "start": "deno --allow-read --allow-write main.ts",
+    "start": {
+      "description": "Starts the application",
+      "dependencies": ["fmt", "generate"]
+    },
+    "generate": "deno --allow-read --allow-write main.ts",
     "fmt": "deno fmt --unstable-sql"
   },
   "imports": {
+    "@std/cli": "jsr:@std/cli@^1.0.27",
     "@std/fs": "jsr:@std/fs@^1.0.21",
     "deno-tree-sitter": "https://deno.land/x/deno_tree_sitter@1.0.1.2/main/main.js",
     "common-tree-sitter-languages/": "https://esm.sh/gh/EthanThatOneKid/common_tree_sitter_languages/main/"

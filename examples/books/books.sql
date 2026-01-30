@@ -1,3 +1,4 @@
+-- authorsTable creates the authors table.
 CREATE TABLE authors (
   id BIGINT PRIMARY KEY,
   name text NOT NULL,
@@ -45,13 +46,3 @@ DELETE FROM
 WHERE
   id = ?;
 
--- updateAuthor updates an author by id.
-UPDATE
-  authors
-SET
-  name = ?,
-  bio = ?
-WHERE
-  id = ?
-RETURNING
-  *;

@@ -45,4 +45,3 @@ DELETE FROM
   authors
 WHERE
   id = ?;
-

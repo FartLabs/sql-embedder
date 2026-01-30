@@ -3,34 +3,30 @@
 /**
  * authorsTable creates the authors table.
  */
-export const authorsTable =
-  "CREATE TABLE authors (\r\n  id BIGINT PRIMARY KEY,\r\n  name text NOT NULL,\r\n  bio text\r\n)";
+export const authorsTable = "CREATE TABLE authors (\n  id BIGINT PRIMARY KEY,\n  name text NOT NULL,\n  bio text\n)";
 
 /**
  * getAuthor gets an author by id.
  */
-export const getAuthor =
-  "SELECT\r\n  *\r\nFROM\r\n  authors\r\nWHERE\r\n  id = ?\r\nLIMIT\r\n  1";
+export const getAuthor = "SELECT\n  *\nFROM\n  authors\nWHERE\n  id = ?\nLIMIT\n  1";
 
 /**
  * listAuthors lists all authors.
  */
-export const listAuthors =
-  "SELECT\r\n  *\r\nFROM\r\n  authors\r\nORDER BY\r\n  name";
+export const listAuthors = "SELECT\n  *\nFROM\n  authors\nORDER BY\n  name";
 
 /**
  * createAuthor creates a new author.
  */
-export const createAuthor =
-  "INSERT INTO\r\n  authors (name, bio)\r\nVALUES\r\n  (?, ?)\r\nRETURNING\r\n  *";
+export const createAuthor = "INSERT INTO\n  authors (name, bio)\nVALUES\n  (?, ?)\nRETURNING\n  *";
 
 /**
  * updateAuthor updates an author by id.
  */
-export const updateAuthor =
-  "UPDATE\r\n  authors\r\nSET\r\n  name = ?,\r\n  bio = ?\r\nWHERE\r\n  id = ?";
+export const updateAuthor = "UPDATE\n  authors\nSET\n  name = ?,\n  bio = ?\nWHERE\n  id = ?";
 
 /**
  * deleteAuthor deletes an author by id.
  */
-export const deleteAuthor = "DELETE FROM\r\n  authors\r\nWHERE\r\n  id = ?";
+export const deleteAuthor = "DELETE FROM\n  authors\nWHERE\n  id = ?";
+

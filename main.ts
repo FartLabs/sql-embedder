@@ -1,9 +1,13 @@
 import { parseArgs } from "@std/cli/parse-args";
 import { expandGlob } from "@std/fs/expand-glob";
 import { createParser } from "deno-tree-sitter";
-import sql from "common-tree-sitter-languages/sql.js";
+import sql from "./lib/sql.js";
 
 if (import.meta.main) {
+  await main();
+}
+
+export async function main() {
   const flags = parseArgs(Deno.args, {
     string: ["dir"],
     alias: { dir: "d" },
@@ -21,7 +25,7 @@ if (import.meta.main) {
     }
 
     // Extract statements and preceding comments
-    const statements: { comments: string[]; statement: string }[] = [];
+    const statements: { comments: string[]; sql: string }[] = [];
     let pendingComments: string[] = [];
 
     for (const child of ast.rootNode.children) {
@@ -29,7 +33,7 @@ if (import.meta.main) {
         pendingComments.push(child.text);
       } else if (child.type === "statement") {
         statements.push({
-          statement: child.text,
+          sql: child.text,
           comments: pendingComments,
         });
         pendingComments = [];
@@ -70,7 +74,7 @@ if (import.meta.main) {
       result += ` */\n`;
 
       result += `export const ${variableName} = ${
-        JSON.stringify(statement.statement)
+        JSON.stringify(statement.sql)
       };\n\n`;
       seen.add(variableName);
     }

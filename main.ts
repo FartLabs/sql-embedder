@@ -1,7 +1,7 @@
 import { parseArgs } from "@std/cli/parse-args";
 import { expandGlob } from "@std/fs/expand-glob";
 import { createParser } from "deno-tree-sitter";
-import sql from "./lib/sql.js";
+import sql from "./sql.js";
 
 if (import.meta.main) {
   await main();

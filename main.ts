@@ -7,6 +7,19 @@ if (import.meta.main) {
   await main();
 }
 
+/**
+ * main is the entry point for the SQL embedder CLI tool.
+ *
+ * Searches for SQL files in the specified directory, parses them using tree-sitter,
+ * # Process SQL files in current directory
+ * deno task start
+ *
+ * # Process SQL files in specific directory
+ * deno task start --dir ./queries
+ * deno task start -d ./queries
+ * deno task start ./queries
+ * ```
+ */
 export async function main() {
   const flags = parseArgs(Deno.args, {
     string: ["dir"],

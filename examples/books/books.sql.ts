@@ -3,12 +3,14 @@
 /**
  * authorsTable creates the authors table.
  */
-export const authorsTable = "CREATE TABLE authors (\n  id BIGINT PRIMARY KEY,\n  name text NOT NULL,\n  bio text\n)";
+export const authorsTable =
+  "CREATE TABLE authors (\n  id BIGINT PRIMARY KEY,\n  name text NOT NULL,\n  bio text\n)";
 
 /**
  * getAuthor gets an author by id.
  */
-export const getAuthor = "SELECT\n  *\nFROM\n  authors\nWHERE\n  id = ?\nLIMIT\n  1";
+export const getAuthor =
+  "SELECT\n  *\nFROM\n  authors\nWHERE\n  id = ?\nLIMIT\n  1";
 
 /**
  * listAuthors lists all authors.
@@ -18,15 +20,16 @@ export const listAuthors = "SELECT\n  *\nFROM\n  authors\nORDER BY\n  name";
 /**
  * createAuthor creates a new author.
  */
-export const createAuthor = "INSERT INTO\n  authors (name, bio)\nVALUES\n  (?, ?)\nRETURNING\n  *";
+export const createAuthor =
+  "INSERT INTO\n  authors (name, bio)\nVALUES\n  (?, ?)\nRETURNING\n  *";
 
 /**
  * updateAuthor updates an author by id.
  */
-export const updateAuthor = "UPDATE\n  authors\nSET\n  name = ?,\n  bio = ?\nWHERE\n  id = ?";
+export const updateAuthor =
+  "UPDATE\n  authors\nSET\n  name = ?,\n  bio = ?\nWHERE\n  id = ?";
 
 /**
  * deleteAuthor deletes an author by id.
  */
 export const deleteAuthor = "DELETE FROM\n  authors\nWHERE\n  id = ?";
-

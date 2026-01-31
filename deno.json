@@ -3,10 +3,6 @@
   "version": "0.0.1",
   "exports": "./main.ts",
   "tasks": {
-    "start": {
-      "description": "Starts the application",
-      "dependencies": ["generate", "fmt"]
-    },
     "generate": "deno --allow-read --allow-write main.ts",
     "fmt": "deno fmt --unstable-sql"
   },

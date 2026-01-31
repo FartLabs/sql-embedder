@@ -36,6 +36,51 @@ SELECT 2;`;
   assertEquals(results[1].sql, "SELECT 2;");
 });
 
+Deno.test("parseSql handles multi-line CREATE TRIGGER statements", () => {
+  const sql = `-- trigger1
+CREATE TRIGGER t1
+AFTER INSERT ON foo
+BEGIN
+  SELECT 1;
+END;
+
+-- query1
+DELETE FROM foo WHERE id = ?;`;
+
+  const results = parseSql(sql);
+  assertEquals(results.length, 2);
+  assertEquals(results[0].comments, ["-- trigger1"]);
+  assertEquals(results[0].sql.includes("CREATE TRIGGER"), true);
+  assertEquals(results[0].sql.includes("END;"), true);
+  assertEquals(results[1].comments, ["-- query1"]);
+  assertEquals(results[1].sql, "DELETE FROM foo WHERE id = ?;");
+});
+
+Deno.test("parseSql handles multiple CREATE TRIGGER statements", () => {
+  const sql = `-- trigger1
+CREATE TRIGGER t1
+AFTER INSERT ON foo
+BEGIN
+  SELECT 1;
+END;
+
+-- trigger2
+CREATE TRIGGER t2
+AFTER DELETE ON foo
+BEGIN
+  SELECT 2;
+END;
+
+-- query1
+SELECT * FROM foo;`;
+
+  const results = parseSql(sql);
+  assertEquals(results.length, 3);
+  assertEquals(results[0].comments, ["-- trigger1"]);
+  assertEquals(results[1].comments, ["-- trigger2"]);
+  assertEquals(results[2].comments, ["-- query1"]);
+});
+
 Deno.test("embedSql generates valid typescript", () => {
   const sql = `-- query1
 SELECT 1;`;

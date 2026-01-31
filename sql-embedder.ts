@@ -57,6 +57,54 @@ export interface ParsedSqlStatement {
 }
 
 /**
+ * splitErrorNode splits an ERROR node's text by embedded comment markers.
+ * Tree-sitter returns ERROR nodes for unparseable SQL (like multi-line CREATE TRIGGER).
+ * These ERROR nodes often contain multiple statements with embedded comments.
+ * This function extracts those embedded statements.
+ */
+function splitErrorNode(errorText: string): ParsedSqlStatement[] {
+  const results: ParsedSqlStatement[] = [];
+  const lines = errorText.split("\n");
+
+  let currentComments: string[] = [];
+  let currentSql: string[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith("--")) {
+      // Found a comment line
+      if (currentSql.length > 0) {
+        // Save the previous statement
+        results.push({
+          sql: currentSql.join("\n"),
+          comments: currentComments,
+        });
+        currentSql = [];
+        currentComments = []; // Reset for next statement
+      }
+      currentComments.push(line);
+    } else if (trimmed.length > 0) {
+      // SQL content
+      currentSql.push(line);
+    } else if (currentSql.length > 0) {
+      // Empty line - keep it as part of current SQL
+      currentSql.push(line);
+    }
+  }
+
+  // Don't forget the last statement
+  if (currentSql.length > 0) {
+    results.push({
+      sql: currentSql.join("\n"),
+      comments: currentComments,
+    });
+  }
+
+  return results;
+}
+
+/**
  * parseSql parses SQL source code and returns an array of parsed SQL statements.
  */
 export function parseSql(sourceCode: string): ParsedSqlStatement[] {
@@ -80,11 +128,27 @@ export function parseSql(sourceCode: string): ParsedSqlStatement[] {
         results[results.length - 1].sql += child.text;
       }
     } else {
-      if (pendingComments.length > 0 || results.length === 0) {
-        results.push({ sql: child.text, comments: pendingComments });
-        pendingComments = [];
-      } else if (results.length > 0) {
-        results[results.length - 1].sql += child.text;
+      // Handle ERROR nodes (e.g., multi-line CREATE TRIGGER statements)
+      // Tree-sitter returns ERROR nodes for SQL it can't parse
+      if (child.type === "ERROR") {
+        // ERROR nodes may contain multiple embedded statements with comments
+        // Split them out and add each as a separate statement
+        const errorStatements = splitErrorNode(child.text);
+        for (const stmt of errorStatements) {
+          // Merge pending comments with the statement's own comments
+          const allComments = [...pendingComments, ...stmt.comments];
+          results.push({ sql: stmt.sql, comments: allComments });
+          pendingComments = [];
+        }
+      } else {
+        // Normal parsed statement
+        if (pendingComments.length > 0 || results.length === 0) {
+          results.push({ sql: child.text, comments: pendingComments });
+          pendingComments = [];
+        } else if (results.length > 0) {
+          // Append to previous statement if no pending comments
+          results[results.length - 1].sql += child.text;
+        }
       }
     }
   }

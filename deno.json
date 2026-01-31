@@ -1,6 +1,6 @@
 {
   "name": "@fartlabs/sql-embedder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": "./main.ts",
   "tasks": {
     "generate": "deno --allow-read --allow-write main.ts",

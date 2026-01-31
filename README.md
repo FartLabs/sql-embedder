@@ -11,6 +11,55 @@ easier when you need access to SQL databases at runtime. No need for
 `--allow-net` or `--allow-read` or `--unstable-text-imports` permissions to load
 them! Generates statically analyzable modules.
 
+## Usage
+
+You can run `sql-embedder` directly:
+
+```sh
+# Process SQL files in current directory
+deno jsr:@fartlabs/sql-embedder
+
+# Process SQL files in a specific directory
+deno jsr:@fartlabs/sql-embedder --dir ./queries
+deno jsr:@fartlabs/sql-embedder -d ./queries
+deno jsr:@fartlabs/sql-embedder ./queries
+```
+
+### Installation
+
+#### Per-project
+
+Add a [`deno task`](https://docs.deno.com/runtime/reference/cli/task/) to your
+`deno.json` for convenient use within your project:
+
+```json
+{
+  "tasks": {
+    "generate": "deno jsr:@fartlabs/sql-embedder src"
+  }
+}
+```
+
+Then run:
+
+```sh
+deno task generate
+```
+
+#### Global installation
+
+For global use across all projects, install `sql-embedder` as a command:
+
+```sh
+deno install -A --name sql-embedder jsr:@fartlabs/sql-embedder
+```
+
+Then use it anywhere:
+
+```sh
+sql-embedder ./queries
+```
+
 ## Development
 
 Format and lint the code:

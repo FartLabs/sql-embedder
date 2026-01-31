@@ -37,7 +37,7 @@ export async function main() {
       throw new Error("Failed to parse SQL file: " + entry.path);
     }
 
-    // Extract statements and preceding comments (all comments before a statement belong to it)
+    // Extract statements and preceding comments.
     const statements: { comments: string[]; sql: string }[] = [];
     let pendingComments: string[] = [];
 

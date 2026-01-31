@@ -74,7 +74,7 @@ deno lint
 Demonstrate the example:
 
 ```sh
-deno task start
+deno task generate
 ```
 
 ---

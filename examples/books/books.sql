@@ -21,7 +21,9 @@ SELECT
 FROM
   authors
 ORDER BY
-  name;
+  name ASC
+LIMIT
+  ? OFFSET ?;
 
 -- createAuthor creates a new author.
 INSERT INTO

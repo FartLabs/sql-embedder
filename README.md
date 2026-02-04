@@ -9,9 +9,8 @@ Embed SQL into TypeScript source code.
 <img width="1184" height="673" alt="Image" src="https://github.com/user-attachments/assets/acea427e-3a13-422e-96af-c108f24027a4" />
 
 `sql-embedder` is a tool to make developing and distributing TypeScript
-applications easier when you need access to SQL databases at runtime. No need
-for `--allow-net` or `--allow-read` or `--unstable-text-imports` permissions to
-load them! Generates statically analyzable modules.
+applications easier when you need access to SQL databases at runtime. Generates
+statically analyzable modules.
 
 ## Usage
 

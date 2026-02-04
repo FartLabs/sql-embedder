@@ -61,6 +61,15 @@ Then use it anywhere:
 sql-embedder ./queries
 ```
 
+### AI coding agents
+
+Install the [skill](https://skills.sh) to teach AI coding agents to edit the
+source `.sql` files instead of the generated `.sql.ts` files:
+
+```sh
+npx skills add fartlabs/sql-embedder
+```
+
 ## Development
 
 Format and lint the code:
